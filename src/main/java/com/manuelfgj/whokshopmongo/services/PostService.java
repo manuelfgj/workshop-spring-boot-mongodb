@@ -15,39 +15,14 @@ public class PostService {
 
 	@Autowired
 	private PostRepository repo;
-/*	
-	public List<Post> findAll(){
-		return repo.findAll();
-	}
-*/	
+
 	public Post findById(String id) {
 		Optional<Post> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
 	
-	/*
-	public Post insert(Post obj) {
-		return repo.insert(obj);
+	public List<Post> findByTitle(String text){
+		return repo.findByTitleContainingIgnoreCase(text);
 	}
-	
-	public void delete(String id) {
-		findById(id);
-		repo.deleteById(id);
-	}
-	
-	public Post update(Post obj) {
-		Post newObj = findById(obj.getId());
-		updateData(newObj, obj);
-		return repo.save(newObj);
-	}
-	
-	private void updateData(Post newObj, Post obj) {
-		newObj.setName(obj.getName());
-		newObj.setEmail(obj.getEmail());		
-	}
-	
-	public Post fromDTO(PostDTO objDTO) {
-		return new Post(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
-	}
-	*/
+
 }
